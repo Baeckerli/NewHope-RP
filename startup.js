@@ -15,37 +15,30 @@ function handleConnect(player){
 alt.on('playerDeath', handleDeath);
 
 export const DeadPlayers = {};
-const TimeBetweenRespawn = 5000; // 5 Seconds
+const TimeBetweenRespawn = 5000; 
 
-/**
- * @param {alt.Player} player
- */
 function handleDeath(player) {
     if (deadPlayers[player.id]) {
         return;
     }
 
     deadPlayers[player.id] = alt.setTimeout(() => {
-        // Check if the player still has an entry.
         if (deadPlayers[player.id]) {
             delete deadPlayers[player.id];
         }
 
-        // Check if the player hasn't just left the server yet.
         if (!player || !player.valid) {
             return;
         }
 
-        player.spawn(0, 0, 0, 0); // Respawn the player.
+        player.spawn(0, 0, 0, 0); 
     }, TimeBetweenRespawn);
 }
 export function cancelRespawn(player) {
-    // Check if an entry exists for a player respawn.
     if (!deadPlayers[player.id]) {
         return;
     }
 
-    // This cancels the timeout from ever being finished.
     alt.clearTimeout(deadPlayers[player.id]);
     delete deadPlayers[player.id];
 }
@@ -68,16 +61,6 @@ export function createVehicle(player, vehicleModel) {
     console.log('Spawned a vehicle');
     return vehicle;
 }
-
-alt.on('playerConnect', (player) => {
-    const spawnedVehicle = createVehicle(player, 'infernus');
-
-    if (!spawnedVehicle) {
-        console.error('Vehicle could not be spawned.');
-        return;
-    }
-});
-
 chat.registerCmd('spawn', (player, modelName) => {
     if (!modelName) {
         modelName = 'mp_m_freemode_01';
