@@ -15,7 +15,7 @@ function handleConnect(player){
 alt.on('playerDeath', handleDeath);
 
 export const DeadPlayers = {};
-const TimeBetweenRespawn = 5000; 
+const TimeBetweenRespawn = 2000; 
 
 function handleDeath(player) {
     if (deadPlayers[player.id]) {
