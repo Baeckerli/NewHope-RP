@@ -12,34 +12,7 @@ function handleConnect(player){
     player.model = `mp_m_freeemode_01`
 }
 
-alt.on('playerDeath', handleDeath);
-
-export const DeadPlayers = {};
-const TimeBetweenRespawn = 2000; 
-
-function handleDeath(player) {
-    if (deadPlayers[player.id]) {
-        return;
-    }
-
-    deadPlayers[player.id] = alt.setTimeout(() => {
-        if (deadPlayers[player.id]) {
-            delete deadPlayers[player.id];
-        }
-
-        if (!player || !player.valid) {
-            return;
-        }
-
-        player.spawn(0, 0, 0, 0); 
-    }, TimeBetweenRespawn);
-}
-export function cancelRespawn(player) {
-    if (!deadPlayers[player.id]) {
-        return;
-    }
-
-    alt.clearTimeout(deadPlayers[player.id]);
+   alt.clearTimeout(deadPlayers[player.id]);
     delete deadPlayers[player.id];
 }
 
