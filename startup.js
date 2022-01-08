@@ -67,4 +67,3 @@ chat.registerCmd('pos', (player) => {
     chat.send(player, `${JSON.stringify(player.pos)}`);
     console.log(player.pos);
 });
-Test 
