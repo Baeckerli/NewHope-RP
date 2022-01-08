@@ -3,4 +3,3 @@ import * as native from 'natives';
 
 function.playerConnect {
 }
-Fangen wir mal an
